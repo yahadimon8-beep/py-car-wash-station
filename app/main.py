@@ -1,11 +1,13 @@
-from typing import List
-
-
 class Car:
-    def __init__(self, comfort_class: int, clean_mark: int, brand: str) -> None:
-        self.comfort_class: int = comfort_class
-        self.clean_mark: int = clean_mark
-        self.brand: str = brand
+    def __init__(
+        self, 
+        comfort_class: int, 
+        clean_mark: int, 
+        brand: str
+    ) -> None:
+        self.comfort_class = comfort_class
+        self.clean_mark = clean_mark
+        self.brand = brand
 
 
 class CarWashStation:
@@ -14,17 +16,17 @@ class CarWashStation:
         distance_from_city_center: float,
         clean_power: int,
         average_rating: float,
-        count_of_ratings: int,
+        count_of_ratings: int
     ) -> None:
-        self.distance_from_city_center: float = distance_from_city_center
-        self.clean_power: int = clean_power
-        self.average_rating: float = average_rating
-        self.count_of_ratings: int = count_of_ratings
+        self.distance_from_city_center = distance_from_city_center
+        self.clean_power = clean_power
+        self.average_rating = average_rating
+        self.count_of_ratings = count_of_ratings
 
     def calculate_washing_price(self, car: Car) -> float:
         """Calculate washing price for a single car."""
-        diff: int = self.clean_power - car.clean_mark
-        price: float = (
+        diff = self.clean_power - car.clean_mark
+        price = (
             car.comfort_class * diff * self.average_rating
             / self.distance_from_city_center
         )
@@ -35,9 +37,9 @@ class CarWashStation:
         if car.clean_mark < self.clean_power:
             car.clean_mark = self.clean_power
 
-    def serve_cars(self, cars: List[Car]) -> float:
+    def serve_cars(self, cars: list[Car]) -> float:
         """Serve a list of cars and return total income."""
-        total_income: float = 0.0
+        total_income = 0.0
         for car in cars:
             if car.clean_mark < self.clean_power:
                 total_income += self.calculate_washing_price(car)
@@ -46,8 +48,7 @@ class CarWashStation:
 
     def rate_service(self, rate: int) -> None:
         """Add a new rate and update average rating."""
-        total_score: float = self.average_rating * self.count_of_ratings
+        total_score = self.average_rating * self.count_of_ratings
         total_score += rate
         self.count_of_ratings += 1
         self.average_rating = round(total_score / self.count_of_ratings, 1)
-
